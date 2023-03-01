@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-ingress
+  namespace: hacker-company
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: api.hacker-company.com
+    http:
+      paths:
+      - path: /v1
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-api-v1
+            port:
+              name: 8O
+      - path: /v2
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-api-v2
+            port:
+              name: 80
